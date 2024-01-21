@@ -6,6 +6,7 @@ import { TodoItem } from "./components/TodoItem";
 import { todoDataMapper } from './utils/mapper';
 import { TodoCountContecst } from '../../app/contecst/TodoCountContecst';
 import { getTaskInProgres } from './utils/helper';
+import './Todo.css'
 
 export const Todo = () => {
     const [data, setData] = useState<Task[]>([]);

@@ -1,0 +1,14 @@
+.add__btn {
+    width: 120px;
+    border: none;
+    background: #82b74b;
+    padding: 10px 20px;
+    border-radius: 8px;
+    outline: none;
+    text-transform: uppercase;
+}
+
+.product__span {
+    font-weight: bold;
+    font-size: 14px;
+}

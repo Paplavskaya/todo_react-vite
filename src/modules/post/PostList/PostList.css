@@ -1,0 +1,9 @@
+.post__item {
+    display: flex;
+    gap: 10px;
+    padding: 20px 0;
+}
+
+.post__item:nth-child(even) {
+    background-color: #ffef96;
+}
