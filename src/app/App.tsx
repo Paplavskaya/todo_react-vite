@@ -5,8 +5,9 @@ import { Catalog } from '../modules/catalog'
 import './App.css'
 import { Layout } from './Layout'
 import { Todo } from '../modules/todo'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { TodoCountContecst } from './contecst/TodoCountContecst'
+import { CategoriesType } from './models/CategoriesType'
 
 export const App = () => {
     const [countTodo, setCountTodo] = useState<number>(0)
@@ -21,8 +22,19 @@ export const App = () => {
         setIsLoading(loading)
     }
 
+    const [categories, setCategories] = useState<CategoriesType[]>([])
+
+    useEffect(()=>{
+        fetch('https://dummyjson.com/products/categories')
+        .then(response => response.json())
+        .then((categories: CategoriesType[]) => {
+            setCategories(categories)
+        })
+    },[])
+
+
     return (
-        <TodoCountContecst.Provider value={{countTodo, onChangeCountTodo, isLoading, onChangeLoading}}>
+        <TodoCountContecst.Provider value={{countTodo, onChangeCountTodo, isLoading, onChangeLoading, categories}}>
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Main />}/>
