@@ -7,3 +7,8 @@
 .post__item:nth-child(even) {
     background-color: #ffef96;
 }
+
+.loading {
+    font-size: 40px;
+    padding: 20px 0 0 200px;
+}

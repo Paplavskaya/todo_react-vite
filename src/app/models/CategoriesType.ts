@@ -1,3 +1,1 @@
-export type CategoriesType = {
-    categories: string[];
-}
+export type CategoriesType = string[];

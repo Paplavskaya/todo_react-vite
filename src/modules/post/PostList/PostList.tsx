@@ -1,21 +1,23 @@
-import { useEffect, useState } from "react"
-import { PostListData } from "./models/PostListData"
-import { PostItem} from "../models/PostItem"
+import { useEffect} from "react"
 import './PostList.css'
 import { Link } from "react-router-dom"
+import { storePost } from "../stores/PostListStore"
+import { observer } from "mobx-react-lite"
 
-export const PostList = () => {
-    const [posts, setPosts] = useState<PostItem[]>([])
+export const PostList = observer(() => {
+
+    const {loadingData, postsData, awaiting} = storePost;
     
     useEffect(()=>{
-        fetch('https://dummyjson.com/posts').then(response => response.json()).
-        then((data: PostListData)=> {
-            setPosts(data.posts)
-        })
+        loadingData()
     }, [])
+
+    if(awaiting) {
+        return <h2 className="loading">Loading...</h2>
+    }
     
     return <div className="conteiner">
-        {posts.length !== 0 && posts.map((shortPost) =>
+        {postsData && postsData.length > 0 && postsData.map((shortPost) =>
                 <div className='post__item' key={shortPost.id}>
                     <div className="post__number">{shortPost.id}</div>
                     <div className="post__title">
@@ -23,4 +25,4 @@ export const PostList = () => {
                     </div>
                 </div>)}
     </div>
-}
+})
