@@ -26,8 +26,8 @@ export const PostPage = observer(() => {
         navigete(`../${+postId! +1}`)
     }
 
-    return <div className="conteiner">
-        {postDataState && <div className="content">
+    return <>
+            {postDataState && <div className="content">
                     <button className="back__btn" onClick={hendleGoBackButtonClick}>go back</button>
                     <h1 className="title">{postDataState.title}</h1>
                     <div className="body">{postDataState.body}</div>
@@ -41,5 +41,5 @@ export const PostPage = observer(() => {
                     </div>
                     <button className="nex-page" onClick={hendleNextPageClick}>nex-page</button>
             </div>}
-    </div>
+    </>
 })

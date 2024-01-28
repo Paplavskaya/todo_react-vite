@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom"
 import { TodoCountContecst } from "../contecst/TodoCountContecst";
+import { Conteiner } from "./components/Conteiner/Conteiner";
 
 export const Layout = () => {
     
@@ -12,7 +13,7 @@ export const Layout = () => {
 
     return <> 
             <header className="header">
-                <div className="conteiner">
+                <Conteiner>
                     <nav className="nav">
                         <ul className="nav__items">
                             <li className="nav__item"><NavLink to="/">Главная</NavLink></li>
@@ -36,10 +37,15 @@ export const Layout = () => {
                             <li className="nav__item"><NavLink to="/todo">Список задач {!loading && <sup className="nav__item__count">{count}</sup>}</NavLink></li>
                         </ul>
                     </nav>
-                </div>
+                </Conteiner>
             </header>
 
-            <Outlet />
-            <footer><div className="conteiner">2024</div></footer>
+            <main className="main">
+                <Conteiner customClass="conteiner__main">
+                    <Outlet />
+                </Conteiner>
+            </main>
+            
+            <footer><Conteiner customClass="conteiner__main">2024</Conteiner></footer>
         </>
 }

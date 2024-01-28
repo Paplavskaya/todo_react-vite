@@ -16,7 +16,7 @@ export const ProductPage = observer(() => {
         }
     }, [productId])
 
-    return <div className='conteiner'>
+    return <>
                 <div className='navigation'>
                     <Link to={'/'}>Главная / </Link>
                     <Link to={'/catalog'}>Каталог</Link>
@@ -38,5 +38,5 @@ export const ProductPage = observer(() => {
                                 <button className="product__add__btn add__btn">В корзину</button>
                             </div>
                 }
-            </div>
+            </>
 })

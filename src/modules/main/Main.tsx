@@ -1,5 +1,5 @@
 export const Main = () => {
-    return <div className="conteiner">
+    return <>
                 <h2>Main</h2>
-        </div>
+        </>
 }

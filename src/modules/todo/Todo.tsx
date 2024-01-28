@@ -64,7 +64,7 @@ export const Todo = () => {
         return <h2>Loading...</h2>
     }
 
-    return <div className='conteiner'>
+    return <>
         <TodoHeader onAddTodo={handleAddTodo}/> 
         {data.length !== 0 ?
             <ul className='todo__items'>
@@ -77,5 +77,5 @@ export const Todo = () => {
             </ul>:
             <h2>Список дел пуст</h2>
         }        
-    </div>
+    </>
 }

@@ -17,7 +17,7 @@ export const Products = ({products,}: ProductProps) => {
 
     const categoryFilter = categoryMapper.filter((item, index) => categoryMapper.indexOf(item) === index)
 
-    return <div className='conteiner'>
+    return <>
                 
                 <div className='navigation'>
                     <Link to={'/'}>Главная</Link>
@@ -58,5 +58,5 @@ export const Products = ({products,}: ProductProps) => {
                     })}
                 </div>
 
-            </div>
+            </>
 }

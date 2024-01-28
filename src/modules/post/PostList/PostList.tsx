@@ -16,7 +16,7 @@ export const PostList = observer(() => {
         return <h2 className="loading">Loading...</h2>
     }
     
-    return <div className="conteiner">
+    return <>
         {postsData && postsData.length > 0 && postsData.map((shortPost) =>
                 <div className='post__item' key={shortPost.id}>
                     <div className="post__number">{shortPost.id}</div>
@@ -24,5 +24,5 @@ export const PostList = observer(() => {
                         <Link to={`/post/${shortPost.id}`}>{shortPost.title}</Link>
                     </div>
                 </div>)}
-    </div>
+    </>
 })
