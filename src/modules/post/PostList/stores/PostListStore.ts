@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { PostListData } from "../PostList/models/PostListData";
+import { PostListData } from "../models/PostListData";
 
 class PostListStore {
 

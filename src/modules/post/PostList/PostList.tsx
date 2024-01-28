@@ -1,7 +1,7 @@
 import { useEffect} from "react"
 import './PostList.css'
 import { Link } from "react-router-dom"
-import { storePost } from "../stores/PostListStore"
+import { storePost } from "./stores/PostListStore"
 import { observer } from "mobx-react-lite"
 
 export const PostList = observer(() => {
