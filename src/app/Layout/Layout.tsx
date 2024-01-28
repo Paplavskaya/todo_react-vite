@@ -46,6 +46,6 @@ export const Layout = () => {
                 </Conteiner>
             </main>
             
-            <footer><Conteiner customClass="conteiner__main">2024</Conteiner></footer>
+            <footer><Conteiner customClass="conteiner__footer">2024</Conteiner></footer>
         </>
 }

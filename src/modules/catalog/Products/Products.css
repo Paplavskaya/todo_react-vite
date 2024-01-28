@@ -1,13 +1,17 @@
 .product__category {
     display: flex;
-    gap: 15px;
+    flex-wrap: wrap;
+    gap: 10px;
     margin-bottom: 20px;
 }
 
-.category__item {
+.ant-btn-default {
     background-color: #ffef96;
-    padding: 10px 20px;
-    border-radius: 10px;
+}
+
+.ant-btn-default:not(:disabled):not(.ant-btn-disabled):hover {
+    color: #82b74b;
+    border-color: #82b74b;
 }
 
 .product__items {
