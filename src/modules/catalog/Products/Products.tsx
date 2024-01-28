@@ -20,11 +20,11 @@ export const Products = ({products,}: ProductProps) => {
     return <div className='conteiner'>
                 
                 <div className='navigation'>
-                    <Link to={'/'}>Главная / </Link>
+                    <Link to={'/'}>Главная</Link>
                 </div>
 
                 <div className="product__category">
-                    {categoryFilter.length !== 0 && categoryFilter.map((category) => {
+                    {categoryFilter && categoryFilter.map((category) => {
 
                         const hendleCategoryClick = () => {
                                 navigeteCategory(`/catalog/category/${category}`)
@@ -46,10 +46,10 @@ export const Products = ({products,}: ProductProps) => {
 
                         return <div className='product__item'key={product.id}>
 
-                                    <img src={product.thumbnail} className='product__item__img'/>
-                                    <div className="product__item__price"  onClick={hendleProductClick}  ><span className='product__span'>Цена: </span>{product.price}</div>
+                                    <img src={product.thumbnail} onClick={hendleProductClick}  className='product__item__img'/>
+                                    <div className="product__item__price"  ><span className='product__span'>Цена: </span>{product.price}</div>
                                     <h2 className="product__item__title"  onClick={hendleProductClick}  >{product.title}</h2>
-                                    <div className="product__item__brand" onClick={hendleProductClick}  ><span className='product__span'>Бренд: </span>{product.brand}</div>
+                                    <div className="product__item__brand" ><span className='product__span'>Бренд: </span>{product.brand}</div>
                                     <div className="product__item__category"><span className='product__span'>Категория: </span>{product.category}</div>
                                     <div className="product__item__rating"><span className='product__span'>Рейтинг: </span>{product.rating}</div>
                                     <button className="product__item__btn add__btn">В корзину</button>

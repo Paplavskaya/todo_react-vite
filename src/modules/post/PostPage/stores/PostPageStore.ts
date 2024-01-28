@@ -12,10 +12,11 @@ export class PostPageStore {
     loadPost = async (postId: string) => {
         try {
             const response = await fetch(`https://dummyjson.com/posts/${postId}`);
-            const data: PostItem = await response.json();
 
-            runInAction(()=>{this.postDataState = data})
-
+            if(response.status === 200) {
+                const data: PostItem = await response.json();
+                runInAction(()=>{this.postDataState = data})
+            }
         } catch(error) {
             console.log(error)
         }
