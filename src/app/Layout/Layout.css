@@ -1,6 +1,9 @@
-.conteiner {
-    width: 80%;
-    max-width: 1280px;
-    margin: 0 auto;
+.header,
+.footer {
+    flex: 0 0 auto;
+}
+
+.main {
+    flex: 1 0 auto;
 }
 

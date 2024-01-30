@@ -1,20 +1,20 @@
-import { useContext } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom"
-import { TodoCountContecst } from "../contecst/TodoCountContecst";
-import { Conteiner } from "./components/Conteiner/Conteiner";
+import { Outlet } from "react-router-dom"
+import { Container } from "./components/Container/Container";
+import { Nav } from "./components/Nav";
 
 export const Layout = () => {
     
-    const context  = useContext(TodoCountContecst);
-    const count = context!.countTodo;
-    const loading = context?.isLoading;
-    const categories = context!.categories;
-    const navigeteCategory = useNavigate();
+    // const context  = useContext(TodoCountContecst);
+    // const count = context!.countTodo;
+    // const loading = context?.isLoading;
+    // const categories = context!.categories;
+    // const navigeteCategory = useNavigate();
 
     return <> 
             <header className="header">
-                <Conteiner>
-                    <nav className="nav">
+                <Container>
+                    <Nav/>
+                    {/* <nav className="nav">
                         <ul className="nav__items">
                             <li className="nav__item"><NavLink to="/">Главная</NavLink></li>
                             <li className="nav__item"><NavLink to="/post">Блог</NavLink></li>
@@ -36,16 +36,16 @@ export const Layout = () => {
                             </li>
                             <li className="nav__item"><NavLink to="/todo">Список задач {!loading && <sup className="nav__item__count">{count}</sup>}</NavLink></li>
                         </ul>
-                    </nav>
-                </Conteiner>
+                    </nav> */}
+                </Container>
             </header>
 
             <main className="main">
-                <Conteiner customClass="conteiner__main">
+                <Container>
                     <Outlet />
-                </Conteiner>
+                </Container>
             </main>
             
-            <footer><Conteiner customClass="conteiner__footer">2024</Conteiner></footer>
+            <footer><Container>2024</Container></footer>
         </>
 }

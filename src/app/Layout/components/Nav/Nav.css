@@ -1,0 +1,13 @@
+.ant-menu-title-content a {
+    color: inherit;
+}
+
+.ant-menu-dark .ant-menu-item-selected {
+    background-color: #82b74b;
+}
+
+.ant-btn-primary,
+.ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
+    background: #82b74b;
+}
+
