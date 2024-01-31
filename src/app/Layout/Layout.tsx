@@ -1,51 +1,80 @@
-import { Outlet } from "react-router-dom"
-import { Container } from "./components/Container/Container";
-import { Nav } from "./components/Nav";
+import { NavLink, Outlet } from "react-router-dom"
+import {
+    CarryOutOutlined,
+    SmileOutlined,
+    ShopOutlined,
+    MenuFoldOutlined,
+    MenuUnfoldOutlined,
+    HomeOutlined,
+  } from '@ant-design/icons';
+import { Layout as AntdLayout, Menu, Button, Row, Col } from 'antd';
+import { useContext, useState} from "react";
+import { TodoCountContecst } from "../contecst/TodoCountContecst";
+import "./Layout.css"
+
+const { Header, Sider, Content } = AntdLayout;
 
 export const Layout = () => {
+
+    const [collapsed, setCollapsed] = useState(false);
     
-    // const context  = useContext(TodoCountContecst);
-    // const count = context!.countTodo;
-    // const loading = context?.isLoading;
-    // const categories = context!.categories;
-    // const navigeteCategory = useNavigate();
+    const context  = useContext(TodoCountContecst);
+    const count = context!.countTodo;
+    const loading = context?.isLoading; 
+    const categories = context!.categories; 
+    
+    const newCategories = categories.map((category)=>{
+        return {
+            label:`${category}`,
+            key: `${category}`,
+        }
+    })
+   
+    return (<AntdLayout style={{ height: '100vh' }}>
+                <Sider  style={{ overflow: 'auto', height: '100vh'}}
+                    trigger={null}
+                    collapsible
+                    breakpoint="sm"
+                    onBreakpoint={(broken) => {
+                        setCollapsed(broken);
+                        }}
+                    collapsed={collapsed}>
 
-    return <> 
-            <header className="header">
-                <Container>
-                    <Nav/>
-                    {/* <nav className="nav">
-                        <ul className="nav__items">
-                            <li className="nav__item"><NavLink to="/">Главная</NavLink></li>
-                            <li className="nav__item"><NavLink to="/post">Блог</NavLink></li>
-                            <li className="nav__item"><NavLink to="/catalog">Каталог</NavLink>
-                                <ul className="submenu__items">
-                                    {categories.length !== 0 && categories.map((category) => {
-                                        const hendleCategoryClick = () => {
-                                            navigeteCategory(`/catalog/category/${category}`)
-                                        }
-                                       
-                                        return <li className="submenu__item" key={category}>
-                                                    <div className="submenu__item__category"
-                                                        onClick={hendleCategoryClick}>
-                                                            {category}
-                                                    </div>
-                                                </li>
-                                    })}
-                                </ul>
-                            </li>
-                            <li className="nav__item"><NavLink to="/todo">Список задач {!loading && <sup className="nav__item__count">{count}</sup>}</NavLink></li>
-                        </ul>
-                    </nav> */}
-                </Container>
-            </header>
+                    <Menu
+                        theme="dark"
+                        mode="inline"
+                        items={[
+                            {label:<NavLink to="/">Главная</NavLink>, key: 'home', icon: <HomeOutlined />},
+                            {label:<NavLink to="/post">Блог</NavLink>, key: 'post', icon: <SmileOutlined />},
+                            {label:<NavLink to="/catalog">Каталог</NavLink>, key: 'catalog', icon: <ShopOutlined />,
+                                children: newCategories
+                            },
+                            {label:<NavLink to="/todo">Список задач {!loading && <sup className="nav__item__count">{count}</sup>}</NavLink>, key: 'todo', icon: <CarryOutOutlined />},
+                        ]}
+                    />
+                </Sider>
+                <AntdLayout>
+                    <Header style={{ padding: 0, }}>
+                        <Row>
+                            <Col flex={1}>
+                                <Button
+                                    type="text"
+                                    icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                                    onClick={() => setCollapsed(!collapsed)}
+                                    style={{
+                                        fontSize: '16px',
+                                        width: 64,
+                                        height: 64,
+                                    }}
+                                />
+                            </Col>
+                        </Row>
+                    </Header>
+                    <Content style={{ padding: '20px', overflow: 'auto' }}>                        
+                        <Outlet /> 
+                    </Content>
 
-            <main className="main">
-                <Container>
-                    <Outlet />
-                </Container>
-            </main>
-            
-            <footer><Container>2024</Container></footer>
-        </>
+                </AntdLayout>
+
+            </AntdLayout>)
 }

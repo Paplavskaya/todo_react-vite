@@ -16,7 +16,7 @@
 
 .product__items {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     column-gap: 20px;
     row-gap: 40px;
     justify-content: space-between;
@@ -24,7 +24,7 @@
 
 .product__item {
     display: grid;
-    width: 400px;
+    width: 280px;
     grid-template-columns: repeat(2 auto);
     grid-template-rows: repeat(5 auto);
     gap: 10px;
@@ -35,15 +35,16 @@
 }
 
 .product__item__img {
-    width: 400px;
-    height: 250px;
+    width: 240px;
+    height: 150px;
     grid-column: 1 / 3;
     grid-row: 1 / 2;
 }
 
 .product__item__title {
-    grid-column: 1 / 2;
+    grid-column: 1 / 3;
     grid-row: 2 / 3;
+    font-size: 18px;
 }
 
 .product__item__brand {
@@ -63,7 +64,7 @@
 
 .product__item__price {
     grid-column: 2 / 3;
-    grid-row: 2 / 3;
+    grid-row: 3 / 4;
     justify-self: end;
     
     font-size: 24px;
@@ -75,4 +76,7 @@
     grid-column: 2 / 3;
     grid-row: 4 / 6;
     justify-self: end;
+    width: 100px;
+    height: 50px;
+    align-self: end;
 }
