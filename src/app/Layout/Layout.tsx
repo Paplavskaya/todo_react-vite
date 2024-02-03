@@ -6,27 +6,37 @@ import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     HomeOutlined,
+    ShoppingCartOutlined,
   } from '@ant-design/icons';
-import { Layout as AntdLayout, Menu, Button, Row, Col } from 'antd';
+import { Layout as AntdLayout, Menu, Button, Row, Col, Badge } from 'antd';
 import { useContext, useState} from "react";
 import { TodoCountContecst } from "../contecst/TodoCountContecst";
 import "./Layout.css"
+import productsStore from "../../common/stores/ProductsStore";
+import cartStore from "../../common/stores/CartStore";
+import { observer } from "mobx-react-lite";
 
 const { Header, Sider, Content } = AntdLayout;
 
-export const Layout = () => {
+export const Layout = observer(() => {
 
     const [collapsed, setCollapsed] = useState(false);
     
     const context  = useContext(TodoCountContecst);
     const count = context!.countTodo;
     const loading = context?.isLoading; 
-    const categories = context!.categories; 
-    
-    const newCategories = categories.map((category)=>{
+
+    const {loadProducts, allCategoriesLayout} = productsStore;
+    const {cartCounts} = cartStore;
+
+    const hendleCategoryClick = (selectedCategory: string) => {
+        loadProducts(selectedCategory)
+    }
+
+    const newCategories = allCategoriesLayout?.map((category: string)=>{
         return {
-            label:`${category}`,
-            key: `${category}`,
+            label: <NavLink to="/catalog" onClick={()=>{hendleCategoryClick(category)}}>{category}</NavLink>,
+            key: `${category}`
         }
     })
    
@@ -46,10 +56,11 @@ export const Layout = () => {
                         items={[
                             {label:<NavLink to="/">Главная</NavLink>, key: 'home', icon: <HomeOutlined />},
                             {label:<NavLink to="/post">Блог</NavLink>, key: 'post', icon: <SmileOutlined />},
-                            {label:<NavLink to="/catalog">Каталог</NavLink>, key: 'catalog', icon: <ShopOutlined />,
-                                children: newCategories
-                            },
                             {label:<NavLink to="/todo">Список задач {!loading && <sup className="nav__item__count">{count}</sup>}</NavLink>, key: 'todo', icon: <CarryOutOutlined />},
+                            {label:<NavLink to="/catalog">Каталог</NavLink>, key: 'all', icon: <ShopOutlined />,
+                                children: newCategories
+                            }, 
+                            {label:<NavLink to="/cart"><Badge count={cartCounts} className="cart">Корзина</Badge></NavLink>, key: 'cart', icon: <ShoppingCartOutlined />},
                         ]}
                     />
                 </Sider>
@@ -77,4 +88,4 @@ export const Layout = () => {
                 </AntdLayout>
 
             </AntdLayout>)
-}
+})

@@ -1,4 +1,4 @@
-import { ProductItem } from "../../models/ProductItem"
+import { ProductItem } from "../../../../common/models/ProductItem"
 
 export type ProductsData = {
     total: number,

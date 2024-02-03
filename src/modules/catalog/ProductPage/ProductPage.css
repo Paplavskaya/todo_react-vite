@@ -11,9 +11,17 @@
     grid-row: 1 / 2;
 }
 
-.product__add__btn {
+.product__add__btn.ant-btn {
     grid-column: 2 / 3;
     grid-row: 1 / 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product__add__btn.ant-btn.ant-btn-default:hover {
+    cursor: pointer;
+    color: #fff;
 }
 
 .product__images {
@@ -55,7 +63,11 @@
    font-weight: bold;
 }
 
-.rating {
+.rating .ant-rate {
     font-size: 14px;
-    color: #dfbe07;
+    margin-left: 10px;
+}
+
+.rating .ant-rate-star:not(:last-child) {
+    margin-inline-end: 5px;
 }

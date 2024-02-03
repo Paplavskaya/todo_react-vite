@@ -6,7 +6,6 @@ type TodoCountContecstType = {
     onChangeCountTodo: (newCount: number) => void,
     isLoading: boolean,
     onChangeLoading: (loading: boolean) => void,
-    categories: CategoriesType[],
 }
 
 export const TodoCountContecst = createContext<TodoCountContecstType | null>(null);

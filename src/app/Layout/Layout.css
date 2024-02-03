@@ -15,11 +15,19 @@
     color: inherit;
 }
 
-.ant-menu-dark .ant-menu-item-selected {
+.ant-menu-dark .ant-menu-item-selected{
     background-color: #82b74b;
 }
 
 .ant-btn-primary,
 .ant-btn-primary:not(:disabled):not(.ant-btn-disabled):hover {
     background: #82b74b;
+}
+
+.cart.ant-badge {
+    color: inherit;
+}
+
+.cart .ant-badge-count  {
+    transform: translate(120%, -45%);
 }

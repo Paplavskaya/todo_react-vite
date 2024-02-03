@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { ProductItem } from "../../models/ProductItem";
+import { ProductItem } from "../../../../common/models/ProductItem";
 
 export class ProductPageStores {
 

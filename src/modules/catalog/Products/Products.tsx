@@ -1,14 +1,16 @@
 import './Products.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { observer } from 'mobx-react-lite';
-import { useEffect, useState } from 'react';
-import { ProductsStore } from './stores/ProductsStore';
-import { Button, Spin } from 'antd';
+import { useEffect} from 'react';
+import productsStore from '../../../common/stores/ProductsStore';
+import { Button, Rate, Spin } from 'antd';
+import cartStore from '../../../common/stores/CartStore';
+import { ProductItem } from '../../../common/models/ProductItem';
+import { ShoppingCartOutlined } from '@ant-design/icons';
 
 export const Products = observer(() => {
-
-    const [store] = useState(()=> new ProductsStore())
-    const {loadProducts, productsData, awaiting, loadCategories, allCategories} = store;
+    const {loadProducts, productsData, awaiting, loadCategories, allCategories} = productsStore;
+    const {addToCart} = cartStore
 
     const navigete = useNavigate();
 
@@ -24,6 +26,10 @@ export const Products = observer(() => {
 
     const hendleCategoryClick = (selectedCategory: string) => {
         loadProducts(selectedCategory)
+    }
+
+    const heandleProductCartClick = (product: ProductItem) => {
+        addToCart(product)
     }
 
     return <>
@@ -50,13 +56,32 @@ export const Products = observer(() => {
                             }
 
                             return <div className='product__item'key={product.id}>
-                                        <img src={product.thumbnail} onClick={hendleProductClick}  className='product__item__img'/>
-                                        <div className="product__item__price"  ><span className='product__span'>Цена: </span>{product.price}</div>
-                                        <h2 className="product__item__title"  onClick={hendleProductClick}  >{product.title}</h2>
-                                        <div className="product__item__brand" ><span className='product__span'>Бренд: </span>{product.brand}</div>
-                                        <div className="product__item__category"><span className='product__span'>Категория: </span>{product.category}</div>
-                                        <div className="product__item__rating"><span className='product__span'>Рейтинг: </span>{product.rating}</div>
-                                        <button className="product__item__btn add__btn">В корзину</button>
+                                        <img src={product.thumbnail}
+                                            onClick={hendleProductClick} 
+                                            className='product__item__img'/>
+                                        <div className="product__rating">
+                                                <Rate disabled defaultValue={product.rating} />
+                                            </div>
+                                        <div className="product__item__price">
+                                            <span className='product__span'>Цена: </span>
+                                            {product.price} y.e
+                                        </div>
+                                        <h2 className="product__item__title"  onClick={hendleProductClick}>
+                                            {product.title}
+                                        </h2>
+                                        <div className="product__item__brand" >
+                                            <span className='product__span'>Бренд: </span>
+                                            {product.brand}
+                                        </div>
+                                        <div className="product__item__category">
+                                            <span className='product__span'>Категория: </span>
+                                            {product.category}
+                                        </div>
+                                        <Button onClick={()=>{heandleProductCartClick(product)}} 
+                                                className="product__item__btn add__btn"
+                                                shape="circle"
+                                                icon={<ShoppingCartOutlined/>}
+                                        />
                                     </div> 
                         })}
                     </div>

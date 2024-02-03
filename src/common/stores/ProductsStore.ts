@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { ProductsData } from "../models/ProductsData";
+import { ProductsData } from "../../modules/catalog/Products/models/ProductsData";
 
-export class ProductsStore {
+class ProductsStore {
 
     productsDataState: ProductsData | undefined = undefined;
     categoriesState: string[] | undefined = undefined;
@@ -13,6 +13,10 @@ export class ProductsStore {
 
     get allCategories () {
         return this.categoriesState && ['all', ...this.categoriesState]
+    }
+
+    get allCategoriesLayout () {
+        return this.categoriesState && ['all categories', ...this.categoriesState]
     }
 
     constructor() {
@@ -32,7 +36,7 @@ export class ProductsStore {
     }
 
     loadProducts = async (category?: string) => {
-        const url = category && category !== 'all' ? 
+        const url = category && category !== 'all' && category !== 'all categories'? 
                     `https://dummyjson.com/products/category/${category}` : 'https://dummyjson.com/products'
 
         try{
@@ -51,3 +55,6 @@ export class ProductsStore {
         }
     }
 }
+
+const productsStore = new ProductsStore()
+export default productsStore

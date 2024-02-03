@@ -5,15 +5,14 @@ import { Catalog } from '../modules/catalog'
 import './App.css'
 import { Layout } from './Layout'
 import { Todo } from '../modules/todo'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { TodoCountContecst } from './contecst/TodoCountContecst'
-import { CategoriesType } from './models/CategoriesType'
+import { Cart } from '../modules/cart'
 
 export const App = () => {
     const [countTodo, setCountTodo] = useState<number>(0)
-
-    const [isLoading, setIsLoading] = useState<boolean>(true);    
-
+    const [isLoading, setIsLoading] = useState<boolean>(true);
+    
     const onChangeCountTodo = (newCount: number) => {
         setCountTodo(newCount)
     }
@@ -21,26 +20,20 @@ export const App = () => {
     const onChangeLoading = (loading: boolean) => {
         setIsLoading(loading)
     }
-
-    const [categories, setCategories] = useState<CategoriesType[]>([])
-
-    useEffect(()=>{
-        fetch('https://dummyjson.com/products/categories')
-        .then(response => response.json())
-        .then((categories: CategoriesType[]) => {
-            setCategories(categories)
-        })
-    },[])
-
-
+          
     return (
-        <TodoCountContecst.Provider value={{countTodo, onChangeCountTodo, isLoading, onChangeLoading, categories}}>
+        <TodoCountContecst.Provider 
+            value={{countTodo,
+                    onChangeCountTodo,
+                    isLoading,
+                    onChangeLoading}}>
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route index element={<Main />}/>
                     <Route path="/post/*" element={<Post />}/>
                     <Route path="/catalog/*" element={<Catalog />}/>
                     <Route path="/todo" element={<Todo />}/>
+                    <Route path='/cart' element={<Cart />}/>
                 </Route>
             </Routes>
         </TodoCountContecst.Provider>
