@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { ProductInCart } from "../../../../common/models/ProductInCart"
 import { useNavigate } from "react-router-dom";
 import { Button, Modal, notification } from 'antd';
@@ -6,26 +5,23 @@ import ButtonGroup from "antd/es/button/button-group";
 import { MinusOutlined, PlusOutlined, DeleteOutlined, ExclamationCircleFilled } from '@ant-design/icons';
 
 type CartProductProps = {
-    product: ProductInCart
-    deleteProduct: (productId: number) => void
+    product: ProductInCart,
+    deleteProduct: (productId: number) => void,
+    increaseCount: (productId: number) => void,
+    declineCount: (productId: number) => void,
 }
 
 const { confirm } = Modal;
 
-export const CartProduct = ({product, deleteProduct}:CartProductProps) => {
+export const CartProduct = ({product, deleteProduct, increaseCount, declineCount}:CartProductProps) => {
     const navigete = useNavigate();
-    const [count, setCount] = useState(product.count);
 
-    const increase = () => {
-        setCount(count + 1);
+    const increase = (id: number) => {
+        increaseCount(id);
     };
 
-    const decline = () => {
-        let newCount = count-1;
-        if (newCount < 0) {
-            newCount = 0;
-        } 
-        setCount(newCount);
+    const decline = (id: number) => {
+        declineCount(id);
     };
 
     const hendleProductClick = () => {
@@ -57,11 +53,11 @@ export const CartProduct = ({product, deleteProduct}:CartProductProps) => {
                     <div className="cart__item__brand" >{product.brand}</div>
                 </div>
                 <ButtonGroup className="cart__item__btns">
-                    <Button onClick={decline} icon={<MinusOutlined />} />
-                    <Button>{count}</Button>
-                    <Button onClick={increase} icon={<PlusOutlined />} />
+                    <Button onClick={() => decline(product.id)} icon={<MinusOutlined />} />
+                    <Button>{product.count}</Button>
+                    <Button onClick={() => increase(product.id)} icon={<PlusOutlined />} />
                 </ButtonGroup>
-                <div className="cart__item__sum">{count*product.price} y.e</div>
+                <div className="cart__item__sum">{product.count*product.price} y.e</div>
                 <Button icon={<DeleteOutlined />}
                     className="cart__item__delete"
                     onClick={() => hendleDeleteProduct(product.id)}

@@ -4,7 +4,7 @@ import { CartProduct } from "./components/CartProduct";
 import './Cart.css'
 
 export const Cart = observer(() => {
-    const {cartState, deleteProduct} = cartStore;
+    const {cartState, deleteProduct, increaseCount, declineCount} = cartStore;
     
     const totalCount = cartState.reduce((acc, productInCart) => {
         return acc + productInCart.count
@@ -20,6 +20,8 @@ export const Cart = observer(() => {
                         key={cartProduct.id}
                         product={cartProduct}
                         deleteProduct={deleteProduct}
+                        increaseCount={increaseCount}
+                        declineCount={declineCount}
                     />
                 )}
                 <div className="cart__product__total">

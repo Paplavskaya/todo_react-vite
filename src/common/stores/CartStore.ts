@@ -29,6 +29,22 @@ class CartStore {
     deleteProduct = (productId: number) => {
         this.cartState = this.cartState.filter(({id})=> id !== productId)
     }
+    
+    increaseCount = (productId: number) => {
+        const findProductIndex = this.cartState.findIndex(({id})=> id === productId); 
+
+        this.cartState[findProductIndex].count += 1
+    }
+
+    declineCount = (productId: number) => {
+        const findProductIndex = this.cartState.findIndex(({id})=> id === productId);
+         
+        this.cartState[findProductIndex].count -= 1
+        
+        if (this.cartState[findProductIndex].count < 0) {
+            this.cartState[findProductIndex].count = 0;
+        }
+    }
 }
 
 const cartStore = new CartStore()
